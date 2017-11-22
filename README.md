@@ -6,7 +6,7 @@
   - **spring.datasource.url**=`jdbc:mysql://localhost:3306/databasename?autoReconnect=true&useSSL=false&rewriteBatchedStatements=true`
   - **spring.datasource.username**=`username`
   - **spring.datasource.password**=`password`
-- Open command prompt and move to spring-boot-file-uploader folder
+- Open command prompt and move to `spring-boot-file-uploader` folder
 - Run the command `mvnw package`  .Wait for the dependencies to download and for the build.
 - Once build is success move to the folder target from command prompt and run the below command `java -jar bloomberg-1.0.0.jar`
 - Application has started on the port 8090 . Access it using the url http://localhost:8090/file/upload
