@@ -12,5 +12,7 @@
 - Application has started on the port 8090 . Access it using the url http://localhost:8090/file/upload
 - For stopping the application.Press ctrl+shift+c
 - For Sample files please refer fxfile13.csv and fxfile4.csv in the root folder.
+- Run the queries for fetching the data `SELECT * FROM FILE_VALID_DATA ` , `SELECT * FROM FILE_INVALID_DATA`
+
 ------------------------------------------------------------------
 If application is not starting please import the project as a maven project into spring STS.Run it as spring boot app
