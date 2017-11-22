@@ -1,6 +1,6 @@
 # spring-boot-file-uploader
 
-- Make sure the JAVA_HOME is set to 1.8
+- Make sure the `JAVA_HOME` is set to `JDK - 1.8`
 - Open the application.properties file from the folder location spring-boot-file-uploader\src\main\resources. 
 - Change the below parameters accordingly.
   - **spring.datasource.url**=`jdbc:mysql://localhost:3306/databasename?autoReconnect=true&useSSL=false&rewriteBatchedStatements=true`
