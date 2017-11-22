@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+	integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
+	crossorigin="anonymous" />
+<!-- Generic page styles -->
+<link rel="stylesheet" href="/css/style.css" />
+<link rel="stylesheet" type="text/css"
+	href="/js/DataTables-1.10.12/media/css/jquery.dataTables.min.css" />
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<h1>jQuery File Upload Demo</h1>
+		<h2 class="lead">Basic Plus UI version</h2>
+		<ul class="nav nav-tabs">
+			<li class="nav-item"><a class="nav-link" href="/file/upload">Upload
+					File</a></li>
+			<li class="nav-item"><a class="nav-link active"
+				href="/file/search">Search File</a></li>
+		</ul>
+		<br></br> <br></br>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<form autocomplete="off" id="search-file-form">
+						<div class="input-group input-group-lg">
+							<input type="text" class="form-control" required="required"
+								id="search-file" placeholder="Search for..." /> <span
+								class="input-group-btn">
+								<button class="btn btn-secondary" type="submit">Go!</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="row" id="file-details-tables" style="display: none;">
+				<div class="col-lg-12">
+				<br></br>
+				<h2 class="lead">Valid File Details</h2>
+				<br></br>
+					<table id="valid-file-details" class="display" cellspacing="0"
+						width="100%">
+						<thead>
+							<tr>
+								<th>File Name</th>
+								<th>Deal Id</th>
+								<th>Deal Amount</th>
+								<th>From Currency</th>
+								<th>To Currency</th>
+								<th>Time Stamp</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+				<div class="col-lg-12">
+				<br></br>
+				<h2 class="lead">In-valid File Details</h2>
+				<br></br>
+					<table id="invalid-file-details" class="display" cellspacing="0"
+						width="100%">
+						<thead>
+							<tr>
+								<th>File Name</th>
+								<th>Deal Id</th>
+								<th>Deal Amount</th>
+								<th>From Currency</th>
+								<th>To Currency</th>
+								<th>Time Stamp</th>
+								<th>Reason</th>
+							</tr>
+						</thead>
+					</table>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</body>
+<script
+	src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+	integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
+	integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+	crossorigin="anonymous"></script>
+<script type="text/javascript"
+	src="/js/DataTables-1.10.12/media/js/jquery.dataTables.min.js"></script>
+<script>
+	$(function() {
+		'use strict';
+		// VARIABLES =============================================================
+		// FUNCTIONS =============================================================
+		function getValidFileDetails(fileName) {
+			$('#valid-file-details').DataTable({
+				"destroy" : true,
+				"scrollX" : true,
+				"scrollCollapse" : true,
+				"deferRender" : true,
+				"ajax" : {
+					"url" : "/api/file/search/valid-file-details/" + fileName,
+					"type" : "GET",
+					"dataSrc" : ""
+				},
+				"columns" : [ {
+					"data" : "fileName",
+				}, {
+					"data" : "dealID"
+				}, {
+					"data" : "dealAmount"
+				}, {
+					"data" : "fromCurrency"
+				}, {
+					"data" : "toCurrency"
+				}, {
+					"data" : "timestampField"
+				} ],
+				"order" : [ [ 1, 'asc' ] ]
+			});
+
+		}
+		function getInValidFileDetails(fileName) {
+			$('#invalid-file-details').DataTable(
+					{
+						"destroy" : true,
+						"scrollX" : true,
+						"scrollCollapse" : true,
+						"deferRender" : true,
+						"ajax" : {
+							"url" : "/api/file/search/invalid-file-details/"
+									+ fileName,
+							"type" : "GET",
+							"dataSrc" : ""
+						},
+						"columns" : [ {
+							"data" : "fileName",
+						}, {
+							"data" : "dealID"
+						}, {
+							"data" : "dealAmount"
+						}, {
+							"data" : "fromCurrency"
+						}, {
+							"data" : "toCurrency"
+						}, {
+							"data" : "timestampField"
+						}, {
+							"data" : "reason"
+						} ],
+						"order" : [ [ 1, 'asc' ] ]
+					});
+
+		}
+		// REGISTER EVENT LISTENERS======================================================
+		$("#search-file-form").submit(function(e) {
+			e.preventDefault();
+			getValidFileDetails($('#search-file').val());
+			getInValidFileDetails($('#search-file').val());
+			$("#file-details-tables").show();
+		});
+		// INITIAL CALLS=============================================================
+	});
+</script>
+
+</html>
