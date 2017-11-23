@@ -58,7 +58,7 @@ public class FileValidatorUtil {
 		List<FxFile> fxFiles = new ArrayList<>();
 		List<FxInvalidFileData> invalidFileDatas = new ArrayList<>();
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
 		Date parsedDate = null;
 		try {
 			List<String> dealList = fxFileRepository.getDealIDs();
@@ -100,7 +100,7 @@ public class FileValidatorUtil {
 				} catch (Exception e) {
 					details[3] = null;
 					valid = false;
-					errordesc += " Invalid TimeStamp";
+					errordesc += " Timestamp should be in yyyy-mm-dd hh:mm:ss format";
 				}
 
 				if (valid) {
