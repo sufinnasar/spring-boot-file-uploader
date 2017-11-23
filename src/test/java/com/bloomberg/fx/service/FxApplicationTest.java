@@ -20,6 +20,7 @@ import com.bloomberg.fx.entity.FxFile;
 import com.bloomberg.fx.entity.FxInvalidFileData;
 import com.bloomberg.fx.repository.EntityManagerFile;
 import com.bloomberg.fx.repository.FxFileRepository;
+import com.bloomberg.fx.repository.FxInvalidFileDataRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = FxApplication.class)
@@ -29,6 +30,11 @@ public class FxApplicationTest {
 
 	@Autowired
 	FxFileRepository rep;
+	
+	@Autowired
+	FxInvalidFileDataRepository fxInvalidFileRepository;
+	
+	
 	
     @Autowired
     private SaveFileService saveFileService;
@@ -50,17 +56,18 @@ public class FxApplicationTest {
 		fxFile.setFromCurrency("USD");
 		fxFile.setToCurrency("IND");
 		fxFile.setFileName("test");
-		fxFile.setTimestampField(Timestamp.valueOf("2017-11-21 10:19:10"));
+		fxFile.setTimestampField(Timestamp.valueOf("2017-11-10 10:19:10"));
 		fxFile.setDealAmount("90731");
 		listFxFile.add(fxFile);
 		
 		listInvalidFxFile = new ArrayList<>();
 		fxInvalidFile = new FxInvalidFileData();
+		fxInvalidFile.setId((int) fxInvalidFileRepository.count()+1);
 		fxInvalidFile.setDealID("99958");
 		fxInvalidFile.setFromCurrency("USDa");
 		fxInvalidFile.setToCurrency("IND");
 		fxInvalidFile.setFileName("test");
-		fxInvalidFile.setTimestampField(Timestamp.valueOf("2017-11-21 10:19:10"));
+		fxInvalidFile.setTimestampField(Timestamp.valueOf("2017-11-10 10:19:10"));
 		fxInvalidFile.setDealAmount("90731");
 		listInvalidFxFile.add(fxInvalidFile);
     	
