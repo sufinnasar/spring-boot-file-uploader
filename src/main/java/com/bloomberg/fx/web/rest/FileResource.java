@@ -58,12 +58,19 @@ public class FileResource {
 		if (!file.isEmpty()) {
 
 			try {
+				if(!file.getOriginalFilename().endsWith(".csv")){
+					stopWatch.stop();
+					return new FileStatus(stopWatch.getTotalTimeSeconds(), file.getOriginalFilename(),
+							" File not imported.Please select a csv file");
+				}
 				name = FilenameUtils.removeExtension(file.getOriginalFilename());
 				if (fxFileRepository.existsbyfileName(name)) {
 					stopWatch.stop();
 					return new FileStatus(stopWatch.getTotalTimeSeconds(), name,
 							" Unsuccessfull Import .File already exists");
-				} else {
+				} 
+				
+				else {
 
 					byte[] bytes = file.getBytes();
 					fileString = new String(bytes, StandardCharsets.UTF_8);
